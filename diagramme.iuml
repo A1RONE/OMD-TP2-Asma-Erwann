@@ -1,0 +1,140 @@
+@startuml
+
+left to right direction
+
+skinparam actorStyle Hollow
+:User: as a1
+
+package Editeur {
+    (Séléctioner zone de texte) as u1
+    (Copier la séléction : ctrl-c ) as u2
+    (Couper la séléction : ctrl-x) as u3
+    (Coller la séléction : ctrl-v) as u4
+    (Ecrire) as u5
+    (Fermer éditeur) as u6 
+    (Ouvrir éditeur) as u7
+    (Modification de séléction de texte) as u8
+}
+
+a1 ---- u1
+a1 --- u2
+a1 - u3
+a1 - u4
+a1 - u5
+a1 - u6
+a1 - u7
+a1 - u8
+
+u3 ..> u2: include
+u4 ..> u2: include
+u2 ..> u1: include
+u8 ...> u1: include
+
+
+@enduml
+
+
+@startuml
+
+autonumber
+hide footbox
+
+skinparam actorStyle Hollow
+Actor Utilisateur as use
+
+
+Participant Editeur 
+Participant Buffer
+Participant PressePapier as Pp
+
+
+use -> Editeur : Séléctionner zone de texte
+use -> Editeur : Appuyer sur la touche ctrl-x
+Editeur -> Buffer : getSelection() : Demander le texte entre les curseurs de séléction :
+Buffer --> Editeur : Renvoyer le texte demandé
+Editeur -> Pp : Placer le texte séléctionné dans le presse-papier
+Editeur -> Buffer : deleteTexte() : Demander la suppression du texte séléctionné
+Buffer --> Editeur : Renvoyer le texte mis à jour
+Editeur --> use : Afficher le texte mis à jour 
+
+@enduml
+
+
+
+@startuml
+
+
+autonumber
+hide footbox
+
+skinparam actorStyle Hollow
+Actor Utilisateur as use
+
+Participant Editeur
+Participant Curseur
+
+use -> Editeur : Cliquer gauche
+Editeur -> Curseur : setBegin(): Définir un index d'entrer 
+group Maintenir clique
+use -> Editeur : Déplacer le curseur
+Editeur -> Curseur : setEnd() 
+end
+use -> Editeur : Lacher le clique 
+Editeur -> Curseur : setEnd() 
+Editeur --> Editeur : Passer en mode Selection
+
+
+@enduml
+
+@startuml
+
+Interface Command{
+    execute()
+}
+
+Class Curseur {
+    setBegin()
+    setEnd()
+}
+
+class Editeur {
+}
+
+class Buffer {
+    String texte
+    getSelection()
+    deleteTexte()
+}
+
+class PressePapier{
+    String texte
+    setTexte()
+}
+
+Class Copy Extends Command{
+
+}
+
+Class Cut Extends Command{
+
+}
+
+Class Paste Extends Command{
+
+}
+
+Class Write Extends Command{
+
+}
+
+Class Selection Extends Command{
+    
+}
+
+Editeur *-- "1" Curseur
+Editeur *-- "1" Buffer
+Editeur *-- "1" PressePapier
+Editeur "1" -- "0-n" Command 
+
+
+@enduml
