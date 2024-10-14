@@ -12,7 +12,12 @@ public class Copy extends ACommand {
 
     @Override
     public void execute() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Editeur editeur = new Editeur();
+        int begin = m_editeur.getSelectionBeginIndex();
+        int end = m_editeur.getSelectionEndIndex();
+        String selected = m_editeur.getBufferText(begin, end);
+        m_editeur.setPressePapierText(selected);
+        // throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
