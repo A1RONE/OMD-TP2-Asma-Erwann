@@ -27,6 +27,14 @@ public class Buffer {
         return main_text;
     }
     /**
+     * Getter retournant la longeur de Text.
+     * @return int Longeuer de Text.
+     */
+    public int getTextLength()
+    {
+        return main_text.length();
+    }
+    /**
      * Supprime l'entiéreté du texte.
      */
     public void deleteText()
