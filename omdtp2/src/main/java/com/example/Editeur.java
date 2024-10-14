@@ -154,7 +154,29 @@ public class Editeur {
         return ( (begin >= 0) && (begin <= getBufferTextLenght()  ) && (end >= 0) && (end <= getBufferTextLenght()) );
     }
     //Presse papier
-
+    /**
+     * Recupere le texte du presse papier
+     * @return String Texte du presse papier.
+     */
+    public String getPressePapierText()
+    {
+        return m_pressepapier.getText();
+    }
+    /**
+     * Remplace le texte du presse papier
+     * @param text String Nouveu texte.
+     */
+    public void setPressePapierText(String text)
+    {
+        m_pressepapier.setText(text);
+    }
+    /*
+     * Supprime le texte du presse papier.
+     */
+    public void deletePressePapiertext()
+    {
+        m_pressepapier.deleteText();
+    }
     //ICommands
     /**
      * Plays an inputed command and add it to the stack.
