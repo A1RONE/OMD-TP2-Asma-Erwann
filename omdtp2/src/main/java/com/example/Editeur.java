@@ -22,6 +22,7 @@ public class Editeur {
         m_buffer = new Buffer();
         m_selection = new Selection();
         m_pressepapier = new PressePapier();
+        m_commands = new Stack<ICommand>();
     }
     /**
      * Getter du buffer lié à l'editeur.
