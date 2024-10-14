@@ -1,4 +1,6 @@
 package com.example;
+import java.util.Stack;
+
 /**
  * Classe representant l'editeur de texte, classe en directe interaction avec les commandes du joueur.
  * Cette classe centralise le projet et possède et a un acces directe vers les autres objet composant l'editeur.
@@ -8,6 +10,7 @@ public class Editeur {
     private Buffer m_buffer;
     private Selection m_selection;
     private PressePapier m_pressepapier;
+    private Stack<ICommand> m_commands;
     /**
      * Constructeur de l'editeur,
      * Crée ses propres objets :
@@ -109,6 +112,38 @@ public class Editeur {
 
     //Selection
     /**
+     * Recupère l'index du pointeur begin (inclus dans la sélection)
+     * @return int L'index du pointeur begin.
+     */
+    public int getSelectionBeginIndex()
+    {
+        return m_selection.getBeginIndex();
+    }
+    /**
+     * Recupère l'index du pointeur end (non inclus dans la sélection)
+     * @return int L'index du pointeur end.
+     */
+    public int getSelectionEndIndex()
+    {
+        return m_selection.getEndIndex();
+    }
+    /**
+     * Modifie l'index de départ de la sélection (inclus)
+     * @param index int Index de départ de la sélection.
+     */
+    public void setSelectionBeginIndex(int index)
+    {
+        m_selection.setBeginIndex(index);
+    }
+    /**
+     * Modifie l'index de fin de la sélection (non inclus)
+     * @param index int Index de fin de la sélection.
+     */
+    public void setSelectionEndIndex(int index)
+    {
+        m_selection.setEndIndex(index);
+    }
+    /**
      * Prend deux indices en paramètres et renvoie true si la selection est inclue dans le texte.
      * @param begin int Indice de début de la selection (inclus).
      * @param end int Indice de fin de la selection (non inclus).
@@ -118,6 +153,43 @@ public class Editeur {
     {
         return ( (begin >= 0) && (begin <= getBufferTextLenght()  ) && (end >= 0) && (end <= getBufferTextLenght()) );
     }
+    //Presse papier
 
+    //ICommands
+    /**
+     * Plays an inputed command and add it to the stack.
+     * If the command doesn't exist an exception is thrown.
+     * @param action String Name of the command. 
+     */
+    public void addCommand(String action)
+    {
+        ICommand com;
+        switch (action) {
+            case "Paste":
+                com = new Paste(this);
+                break;
+            case "Copy":
+                com = new Copy(this);
+                break;
+            case "Cut":
+                com = new Cut(this);
+                break;
+            case "Write":
+                com = new Write(this);
+                break;
+            case "Select":
+                com = new Select(this);
+                break;
+            default:
+                throw new IllegalArgumentException(action+" n'est pas une action valide.");
+
+        }
+        
+        if (com != null){
+            com.execute();
+            m_commands.push(com);
+        }
+
+    }
     
 }
