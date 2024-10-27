@@ -8,7 +8,6 @@ public class Write extends ACommand {
     String new_text;
     int begin_id;
     int end_id;
-    int new_id;
     Scanner scanner = new Scanner(System.in);
 
     public Write (Editeur editeur){
@@ -34,6 +33,15 @@ public class Write extends ACommand {
         Select select = new Select(m_editeur);
         select.setBeginIndex(begin_id + new_text.length());
         select.setEndIndex(begin_id + new_text.length());
+        select.execute();
+    }
+    @Override
+    public void undo()
+    {
+        m_editeur.writeBufferText(old_text, begin_id, begin_id + new_text.length());
+        Select select = new Select(m_editeur);
+        select.setBeginIndex(begin_id);
+        select.setEndIndex(end_id);
         select.execute();
     }
 

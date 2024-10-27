@@ -31,6 +31,15 @@ public class Delete extends ACommand {
         select.setEndIndex(begin_id);
         select.execute();
     }
+    @Override
+    public void undo()
+    {
+        m_editeur.writeBufferText(deleted_text, begin_id, begin_id);
+        Select select = new Select(m_editeur);
+        select.setBeginIndex(begin_id);
+        select.setEndIndex(end_id);
+        select.execute();
+    }
 
     public String getOldData()
     {
