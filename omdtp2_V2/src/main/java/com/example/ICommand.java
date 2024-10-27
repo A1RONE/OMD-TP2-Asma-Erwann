@@ -8,5 +8,13 @@ public interface ICommand {
      * Methode permettant l'execution de la commande.
      */
     public void execute();
+    /**
+     * Methode permettant de retirer la commande.
+     */
+    public void undo();
+    /**
+     * Methode permettant de reexecuter la commande.
+     */
+    public void redo();
     
 }

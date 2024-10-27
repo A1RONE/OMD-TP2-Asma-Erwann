@@ -11,6 +11,7 @@ public class Editeur {
     private Selection m_selection;
     private PressePapier m_pressepapier;
     private Stack<ICommand> m_commands;
+    private Stack<ICommand> m_redo;
     /**
      * Constructeur de l'editeur,
      * Crée ses propres objets :
@@ -23,6 +24,7 @@ public class Editeur {
         m_selection = new Selection();
         m_pressepapier = new PressePapier();
         m_commands = new Stack<ICommand>();
+        m_redo = new Stack<ICommand>();
     }
     /**
      * Getter du buffer lié à l'editeur.
@@ -213,10 +215,56 @@ public class Editeur {
         }
         
         if (com != null){
+            m_redo.clear();
             com.execute();
             m_commands.push(com);
         }
 
+    }
+    public void undoCommand()
+    {
+        if (m_commands.empty())
+        {
+            return;
+        }
+
+        ICommand com = m_commands.pop();
+        m_redo.push(com);
+        if ( com instanceof Copy )
+        {
+            while (com instanceof Copy) { 
+                if (m_commands.empty())
+                {
+                    return;
+                }
+                com = m_commands.pop();
+                m_redo.push(com);
+            }
+        }
+        com.undo();
+    }
+
+    public void redoCommand()
+    {
+        if (m_redo.empty())
+        {
+            return;
+        }
+
+        ICommand com = m_redo.pop();
+        m_commands.push(com);
+        if ( com instanceof Copy )
+        {
+            while (com instanceof Copy) { 
+                if (m_redo.empty())
+                {
+                    return;
+                }
+                com = m_redo.pop();
+                m_commands.push(com);
+            }
+        }
+        com.redo();        
     }
     
 }

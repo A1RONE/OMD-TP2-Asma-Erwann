@@ -5,6 +5,7 @@ public class Cut extends ACommand {
     String new_text;
     int begin_id;
     int end_id;
+    Delete delete;
 
     public Cut(Editeur editeur){
         super(editeur);
@@ -22,14 +23,20 @@ public class Cut extends ACommand {
         Copy copy = new Copy(m_editeur);
         copy.execute();
         if (begin_id != end_id){
-            Delete delete = new Delete(m_editeur);
+            delete = new Delete(m_editeur);
             delete.execute();
             new_text = delete.getOldData();
         }
-        Select select = new Select(m_editeur);
-        select.setBeginIndex(begin_id);
-        select.setEndIndex(begin_id);
-        select.execute();
+    }
+    @Override
+    public void undo()
+    {
+        delete.undo();
+    }
+    @Override
+    public void redo()
+    {
+        delete.redo();
     }
 
     public String getOldData()
