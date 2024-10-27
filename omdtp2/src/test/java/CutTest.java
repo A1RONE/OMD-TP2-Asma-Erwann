@@ -35,6 +35,24 @@ public class CutTest {
         message = "Hello";
         assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
 
+        editeur = new Editeur();
+        message = "Hello world!";
+        editeur.writeBufferText(message);
+        result = editeur.getBufferText();
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'"); 
+
+        editeur.setSelectionBeginIndex(0);
+        editeur.setSelectionEndIndex(5);
+
+        editeur.addCommand("Cut");
+
+        result = editeur.getBufferText();
+        message = " world!";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+
+        result = editeur.getPressePapierText();
+        message = "Hello";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");       
         
     }
 }

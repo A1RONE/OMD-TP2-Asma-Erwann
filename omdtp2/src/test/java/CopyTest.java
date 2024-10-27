@@ -1,9 +1,6 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-// import org.junit.jupiter.api.Test;
 import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.example.Copy;
 import com.example.Editeur;
 
 public class CopyTest {
@@ -21,8 +18,7 @@ public class CopyTest {
         editeur.setSelectionBeginIndex(0);
         editeur.setSelectionEndIndex(5);
 
-        Copy copy = new Copy(editeur);
-        copy.execute();
+        editeur.addCommand("Copy");
 
         result = editeur.getPressePapierText();
         contenu = "Hello";

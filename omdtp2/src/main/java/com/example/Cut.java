@@ -20,6 +20,8 @@ public class Cut extends ACommand {
         // (garde une trace de l'execution)
         new_text = m_editeur.getBufferText(begin_id, end_id);
         // Remplace le texte
+        Copy copy = new Copy(m_editeur);
+        copy.execute();
         m_editeur.deleteBufferText(begin_id, end_id);
         m_editeur.setPressePapierText(new_text);
     }
