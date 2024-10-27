@@ -21,9 +21,15 @@ public class Cut extends ACommand {
         // Remplace le texte
         Copy copy = new Copy(m_editeur);
         copy.execute();
-        Delete delete = new Delete(m_editeur);
-        delete.execute();
-        new_text = delete.getOldData();
+        if (begin_id != end_id){
+            Delete delete = new Delete(m_editeur);
+            delete.execute();
+            new_text = delete.getOldData();
+        }
+        Select select = new Select(m_editeur);
+        select.setBeginIndex(begin_id);
+        select.setEndIndex(begin_id);
+        select.execute();
     }
 
     public String getOldData()

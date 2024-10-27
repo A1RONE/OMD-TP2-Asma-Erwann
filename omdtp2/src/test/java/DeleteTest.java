@@ -31,6 +31,20 @@ public class DeleteTest {
         message = "Hello";
         assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
 
+        editeur.setSelectionBeginIndex(1);
+        editeur.setSelectionEndIndex(1);
+
+        delete = new Delete(editeur);
+        delete.execute();
+
+        result = editeur.getBufferText();
+        message = "world!";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");     
+
+        result = delete.getOldData();
+        message = " ";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+
         editeur = new Editeur();
         message = "Hello world!";
         editeur.writeBufferText(message);

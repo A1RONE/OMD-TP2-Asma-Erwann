@@ -30,7 +30,10 @@ public class Write extends ACommand {
             new_text = scanner.nextLine();
         }
         m_editeur.writeBufferText(new_text, begin_id, end_id);
-        new_id = begin_id + new_text.length();
+        Select select = new Select(m_editeur);
+        select.setBeginIndex(begin_id + new_text.length());
+        select.setEndIndex(begin_id + new_text.length());
+        select.execute();
     }
 
 

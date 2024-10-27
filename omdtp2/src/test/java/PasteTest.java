@@ -33,6 +33,15 @@ public class PasteTest {
         message = "Hello";
         assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
 
+
+        //editeur.addCommand("Paste");
+        paste = new Paste(editeur);
+        paste.execute();
+
+        result = editeur.getBufferText();
+        message = "GoodbyeGoodbye world!";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+
         editeur = new Editeur();
         message = "Hello world!";
         editeur.writeBufferText(message);

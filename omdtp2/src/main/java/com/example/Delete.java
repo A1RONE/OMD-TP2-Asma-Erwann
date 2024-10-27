@@ -17,11 +17,19 @@ public class Delete extends ACommand {
         // Recupère les index de la sélection
         begin_id = m_editeur.getSelectionBeginIndex();
         end_id = m_editeur.getSelectionEndIndex();
+        if (begin_id == end_id && begin_id != 0 )
+        {
+            begin_id -=1;
+        }
         // Recupère et stock le texte qui va être supprimer
         // (garde une trace de l'execution)
         deleted_text = m_editeur.getBufferText(begin_id, end_id);
         // Supprime le texte
         m_editeur.deleteBufferText(begin_id, end_id);
+        Select select = new Select(m_editeur);
+        select.setBeginIndex(begin_id);
+        select.setEndIndex(begin_id);
+        select.execute();
     }
 
     public String getOldData()

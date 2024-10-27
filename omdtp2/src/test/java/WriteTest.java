@@ -32,6 +32,18 @@ public class WriteTest {
         result = write.getOldData();
         message = "Hello";
         assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+        write = new Write(editeur);
+        text = " Bob";
+        write.setNewText(text);
+        write.execute();
+
+        result = editeur.getBufferText();
+        message = "Goodbye Bob world!";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+
+        result = write.getOldData();
+        message = "";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
 
         
     }
