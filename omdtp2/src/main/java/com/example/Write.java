@@ -27,6 +27,7 @@ public class Write extends ACommand {
         // Remplace le texte
         if (new_text.equals(""))
         {
+            System.out.println("Entrer le nouveau texte :");
             new_text = scanner.nextLine();
         }
         m_editeur.writeBufferText(new_text, begin_id, end_id);
