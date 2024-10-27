@@ -35,6 +35,40 @@ public class CutTest {
         message = "Hello";
         assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
 
+        //editeur.addCommand("Paste");
+        cut = new Cut(editeur);
+        cut.execute();
+
+        result = editeur.getBufferText();
+        message = " world!";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+
+        result = editeur.getPressePapierText();
+        message = "";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");       
+
+        result = cut.getOldData();
+        message = "";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+
+        
+        editeur.setSelectionEndIndex(1);
+
+        cut = new Cut(editeur);
+        cut.execute();
+
+        result = editeur.getBufferText();
+        message = "world!";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+
+        result = editeur.getPressePapierText();
+        message = " ";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");       
+
+        result = cut.getOldData();
+        message = " ";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+
         editeur = new Editeur();
         message = "Hello world!";
         editeur.writeBufferText(message);

@@ -23,6 +23,10 @@ public class Paste extends ACommand {
         old_text = m_editeur.getBufferText(begin_id, end_id);
         // Remplace le texte
         m_editeur.writeBufferText(new_text, begin_id, end_id);
+        Select select = new Select(m_editeur);
+        select.setBeginIndex(begin_id + new_text.length());
+        select.setEndIndex(begin_id + new_text.length());
+        select.execute();
     }
 
     public String getOldData()
