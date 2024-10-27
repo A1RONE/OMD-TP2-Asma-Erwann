@@ -45,6 +45,5 @@ public class WriteTest {
         message = "";
         assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
 
-        
     }
 }
