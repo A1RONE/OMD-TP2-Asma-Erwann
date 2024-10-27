@@ -203,6 +203,10 @@ public class Editeur {
             case "Select":
                 com = new Select(this);
                 break;
+            case "Delete":
+                com = new Delete(this);
+                break;
+            
             default:
                 throw new IllegalArgumentException(action+" n'est pas une action valide.");
 
