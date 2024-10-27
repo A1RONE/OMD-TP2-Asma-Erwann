@@ -15,7 +15,7 @@
     <property name="user.country" value="FR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\erwan\AppData\Local\Temp\surefire6883212738968531151\surefirebooter320396378362187961.jar C:\Users\erwan\AppData\Local\Temp\surefire6883212738968531151 2024-10-27T19-45-48_496-jvmRun1 surefire5919674206570317771tmp surefire_06409045258555532599tmp"/>
+    <property name="sun.java.command" value="C:\Users\erwan\AppData\Local\Temp\surefire2511956625002737670\surefirebooter904864430603244435.jar C:\Users\erwan\AppData\Local\Temp\surefire2511956625002737670 2024-10-27T20-38-49_865-jvmRun1 surefire6566082831280007196tmp surefire_08728757064368494211tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="PasteTest"/>
     <property name="surefire.test.class.path" value="C:\Users\erwan\Documents\cours\OMD\TP2\OMD-TP2-Asma-Erwann\omdtp2_V2\target\test-classes;C:\Users\erwan\Documents\cours\OMD\TP2\OMD-TP2-Asma-Erwann\omdtp2_V2\target\classes;C:\Users\erwan\.m2\repository\org\junit\platform\junit-platform-launcher\1.11.2\junit-platform-launcher-1.11.2.jar;C:\Users\erwan\.m2\repository\org\junit\platform\junit-platform-engine\1.11.2\junit-platform-engine-1.11.2.jar;C:\Users\erwan\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\erwan\.m2\repository\org\junit\platform\junit-platform-commons\1.11.2\junit-platform-commons-1.11.2.jar;C:\Users\erwan\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\erwan\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.2\junit-jupiter-engine-5.11.2.jar;C:\Users\erwan\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.2\junit-jupiter-api-5.11.2.jar;C:\Users\erwan\.m2\repository\org\junit\vintage\junit-vintage-engine\5.11.2\junit-vintage-engine-5.11.2.jar;C:\Users\erwan\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\erwan\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\erwan\AppData\Local\Temp\surefire6883212738968531151\surefirebooter320396378362187961.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\erwan\AppData\Local\Temp\surefire2511956625002737670\surefirebooter904864430603244435.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.4+8-LTS-274"/>

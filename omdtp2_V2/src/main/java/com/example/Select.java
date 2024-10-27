@@ -59,6 +59,12 @@ public class Select extends ACommand {
         m_editeur.setSelectionBeginIndex(old_begin_id);
         m_editeur.setSelectionEndIndex(old_end_id);
     }
+    @Override
+    public void redo()
+    {
+        m_editeur.setSelectionBeginIndex(begin_id);
+        m_editeur.setSelectionEndIndex(end_id);        
+    }
 
     public void setBeginIndex(int begin_id) {
         this.begin_id = begin_id;

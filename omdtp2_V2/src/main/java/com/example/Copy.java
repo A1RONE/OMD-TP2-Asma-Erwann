@@ -21,5 +21,7 @@ public class Copy extends ACommand {
     }
     @Override
     public void undo(){}
+    @Override
+    public void redo(){}
     
 }

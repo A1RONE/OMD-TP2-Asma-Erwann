@@ -16,6 +16,7 @@ public class Main {
             System.out.println("CUT");
             System.out.println("PASTE");
             System.out.println("UNDO");
+            System.out.println("REDO");
             System.out.println("END");
 
             ans = scanner.nextLine();
@@ -41,6 +42,9 @@ public class Main {
                     break;
                 case "UNDO":
                     editeur.undoCommand();
+                    break;
+                case "REDO":
+                    editeur.redoCommand();
                     break;
                 case "END":
                     return;

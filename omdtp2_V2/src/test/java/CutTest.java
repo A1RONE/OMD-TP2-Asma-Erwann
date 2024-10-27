@@ -73,6 +73,12 @@ public class CutTest {
 
         result = editeur.getBufferText();
         message = " world!";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");   
+        
+        cut.redo();
+
+        result = editeur.getBufferText();
+        message = "world!";
         assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");        
 
         editeur = new Editeur();

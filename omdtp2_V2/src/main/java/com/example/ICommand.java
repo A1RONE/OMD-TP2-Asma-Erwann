@@ -12,5 +12,9 @@ public interface ICommand {
      * Methode permettant de retirer la commande.
      */
     public void undo();
+    /**
+     * Methode permettant de reexecuter la commande.
+     */
+    public void redo();
     
 }

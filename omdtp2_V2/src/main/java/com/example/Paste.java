@@ -6,6 +6,7 @@ public class Paste extends ACommand {
     int begin_id;
     int end_id;
     String new_text;
+    Select select;
 
     public Paste (Editeur editeur){
         super(editeur);
@@ -24,7 +25,7 @@ public class Paste extends ACommand {
         old_text = m_editeur.getBufferText(begin_id, end_id);
         // Remplace le texte
         m_editeur.writeBufferText(new_text, begin_id, end_id);
-        Select select = new Select(m_editeur);
+        select = new Select(m_editeur);
         select.setBeginIndex(begin_id + new_text.length());
         select.setEndIndex(begin_id + new_text.length());
         select.execute();
@@ -33,10 +34,14 @@ public class Paste extends ACommand {
     public void undo()
     {
         m_editeur.writeBufferText(old_text, begin_id, begin_id + new_text.length());
-        Select select = new Select(m_editeur);
-        select.setBeginIndex(begin_id);
-        select.setEndIndex(end_id);
-        select.execute();
+        select.undo();
+    }
+    @Override
+    public void redo()
+    {
+        // Remplace le texte
+        m_editeur.writeBufferText(new_text, begin_id, end_id);
+        select.redo();
     }
 
     public String getOldData()

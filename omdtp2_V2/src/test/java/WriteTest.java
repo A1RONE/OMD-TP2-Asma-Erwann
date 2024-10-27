@@ -52,6 +52,13 @@ public class WriteTest {
         message = "Goodbye world!";
         assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
 
+        write.redo();
+
+        result = editeur.getBufferText();
+        message = "Goodbye Bob world!";
+        assertEquals(message, result, "Le text devrait être \'"+message+"\' mais actuellement on a : \'"+result+"\'");
+
+
 
     }
 }

@@ -5,6 +5,7 @@ public class Delete extends ACommand {
     String deleted_text;
     int begin_id;
     int end_id;
+    Select select;
 
     public Delete(Editeur editeur){
         super(editeur);
@@ -26,7 +27,7 @@ public class Delete extends ACommand {
         deleted_text = m_editeur.getBufferText(begin_id, end_id);
         // Supprime le texte
         m_editeur.deleteBufferText(begin_id, end_id);
-        Select select = new Select(m_editeur);
+        select = new Select(m_editeur);
         select.setBeginIndex(begin_id);
         select.setEndIndex(begin_id);
         select.execute();
@@ -35,10 +36,13 @@ public class Delete extends ACommand {
     public void undo()
     {
         m_editeur.writeBufferText(deleted_text, begin_id, begin_id);
-        Select select = new Select(m_editeur);
-        select.setBeginIndex(begin_id);
-        select.setEndIndex(end_id);
-        select.execute();
+        select.undo();
+    }
+    @Override
+    public void redo()
+    {
+        m_editeur.deleteBufferText(begin_id, end_id);
+        select.redo();       
     }
 
     public String getOldData()

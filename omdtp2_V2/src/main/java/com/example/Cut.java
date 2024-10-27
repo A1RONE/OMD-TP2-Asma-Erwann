@@ -33,6 +33,11 @@ public class Cut extends ACommand {
     {
         delete.undo();
     }
+    @Override
+    public void redo()
+    {
+        delete.redo();
+    }
 
     public String getOldData()
     {

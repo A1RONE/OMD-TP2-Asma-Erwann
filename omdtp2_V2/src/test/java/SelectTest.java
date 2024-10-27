@@ -34,6 +34,12 @@ public class SelectTest {
         assertEquals(0, begin_id, "L'index devrait être' \'"+String.valueOf(0)+"\' mais actuellement on a : \'"+String.valueOf(begin_id)+"\'");
         assertEquals(0, end_id, "L'index devrait être' \'"+String.valueOf(0)+"\' mais actuellement on a : \'"+String.valueOf(end_id)+"\'");
 
+        select.redo();
+        begin_id = editeur.getSelectionBeginIndex();
+        end_id = editeur.getSelectionEndIndex();
+        assertEquals(base_begin_id, begin_id, "L'index devrait être' \'"+String.valueOf(base_begin_id)+"\' mais actuellement on a : \'"+String.valueOf(begin_id)+"\'");
+        assertEquals(base_end_id, end_id, "L'index devrait être' \'"+String.valueOf(base_end_id)+"\' mais actuellement on a : \'"+String.valueOf(end_id)+"\'");
+
 
     }
 

@@ -25,4 +25,9 @@ public abstract class ACommand implements ICommand {
      */
     @Override
     public abstract void undo();
+    /**
+     * Methode permettant de reexecuter la commande.
+     */
+    @Override
+    public abstract void redo();
 }
