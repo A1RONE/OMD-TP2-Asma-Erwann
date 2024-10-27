@@ -20,4 +20,9 @@ public abstract class ACommand implements ICommand {
      */
     @Override
     public abstract void execute();
+    /**
+     * Methode permettant de retirer la commande.
+     */
+    @Override
+    public abstract void undo();
 }

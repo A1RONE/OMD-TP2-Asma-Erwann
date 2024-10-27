@@ -218,5 +218,25 @@ public class Editeur {
         }
 
     }
+    public void undoCommand()
+    {
+        if (m_commands.empty())
+        {
+            throw new IndexOutOfBoundsException("Stack is empty");
+        }
+
+        ICommand com = m_commands.pop();
+        if ( com instanceof Copy )
+        {
+            while (com instanceof Copy) { 
+                if (m_commands.empty())
+                {
+                    return;
+                }
+                com = m_commands.pop();
+            }
+        }
+        com.undo();
+    }
     
 }

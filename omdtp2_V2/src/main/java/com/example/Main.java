@@ -15,6 +15,7 @@ public class Main {
             System.out.println("COPY");
             System.out.println("CUT");
             System.out.println("PASTE");
+            System.out.println("UNDO");
             System.out.println("END");
 
             ans = scanner.nextLine();
@@ -37,6 +38,9 @@ public class Main {
                     break;
                 case "PASTE":
                     editeur.addCommand("Paste");
+                    break;
+                case "UNDO":
+                    editeur.undoCommand();
                     break;
                 case "END":
                     return;

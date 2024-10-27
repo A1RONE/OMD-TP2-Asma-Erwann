@@ -6,6 +6,8 @@ public class Select extends ACommand {
 
     int begin_id;
     int end_id;
+    int old_begin_id;
+    int old_end_id;
     Scanner scanner = new Scanner(System.in);
 
     public Select (Editeur editeur){
@@ -16,6 +18,10 @@ public class Select extends ACommand {
     
     @Override
     public void execute() {
+
+        old_begin_id = m_editeur.getSelectionBeginIndex();
+        old_end_id = m_editeur.getSelectionEndIndex();
+
         if (begin_id == -1)
         {
             while (true) { 
@@ -46,6 +52,12 @@ public class Select extends ACommand {
 
         m_editeur.setSelectionBeginIndex(begin_id);
         m_editeur.setSelectionEndIndex(end_id);
+    }
+    @Override
+    public void undo()
+    {
+        m_editeur.setSelectionBeginIndex(old_begin_id);
+        m_editeur.setSelectionEndIndex(old_end_id);
     }
 
     public void setBeginIndex(int begin_id) {

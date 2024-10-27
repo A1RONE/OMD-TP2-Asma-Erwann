@@ -19,5 +19,7 @@ public class Copy extends ACommand {
         m_editeur.setPressePapierText(selected);
         // throw new UnsupportedOperationException("Not supported yet.");
     }
+    @Override
+    public void undo(){}
     
 }
