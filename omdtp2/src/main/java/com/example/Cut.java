@@ -18,12 +18,12 @@ public class Cut extends ACommand {
         end_id = m_editeur.getSelectionEndIndex();
         // Recupère et stock le texte qui va être mis dans le presse papier
         // (garde une trace de l'execution)
-        new_text = m_editeur.getBufferText(begin_id, end_id);
         // Remplace le texte
         Copy copy = new Copy(m_editeur);
         copy.execute();
-        m_editeur.deleteBufferText(begin_id, end_id);
-        m_editeur.setPressePapierText(new_text);
+        Delete delete = new Delete(m_editeur);
+        delete.execute();
+        new_text = delete.getOldData();
     }
 
     public String getOldData()
