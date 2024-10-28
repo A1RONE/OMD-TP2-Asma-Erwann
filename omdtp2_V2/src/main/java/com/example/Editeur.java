@@ -1,4 +1,7 @@
 package com.example;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -12,6 +15,11 @@ public class Editeur {
     private PressePapier m_pressepapier;
     private Stack<ICommand> m_commands;
     private Stack<ICommand> m_redo;
+    private ArrayList<ICommand> m_macro;
+    private ArrayList<String> m_command_list = new ArrayList<>(Arrays.asList(
+        "WRITE", "SELECT", "DELETE", "COPY", "CUT", "PASTE"
+    ));
+    private Scanner scanner = new Scanner(System.in);
     /**
      * Constructeur de l'editeur,
      * Crée ses propres objets :
@@ -25,6 +33,7 @@ public class Editeur {
         m_pressepapier = new PressePapier();
         m_commands = new Stack<ICommand>();
         m_redo = new Stack<ICommand>();
+        m_macro = new ArrayList<ICommand>();
     }
     /**
      * Getter du buffer lié à l'editeur.
@@ -208,6 +217,26 @@ public class Editeur {
             case "Delete":
                 com = new Delete(this);
                 break;
+            case "Macro":
+                ArrayList<ICommand> new_macro = new ArrayList<>();
+                for (int i=0; i<m_macro.size(); i++)
+                {
+                    if (m_macro.get(i) instanceof Paste) {
+                        new_macro.add(new Paste((Paste)m_macro.get(i)));
+                    } else if (m_macro.get(i) instanceof Copy) {
+                        new_macro.add(new Copy((Copy)m_macro.get(i)));
+                    } else if (m_macro.get(i) instanceof Cut) {
+                        new_macro.add(new Cut((Cut)m_macro.get(i)));
+                    } else if (m_macro.get(i) instanceof Write) {
+                        new_macro.add(new Write((Write)m_macro.get(i)));
+                    } else if (m_macro.get(i) instanceof Select) {
+                        new_macro.add(new Select((Select)m_macro.get(i)));
+                    } else if (m_macro.get(i) instanceof Delete) {
+                        new_macro.add(new Delete((Delete)m_macro.get(i)));
+                    }
+                }
+                com = new Macro(this, new_macro);
+                break;
             
             default:
                 throw new IllegalArgumentException(action+" n'est pas une action valide.");
@@ -265,6 +294,105 @@ public class Editeur {
             }
         }
         com.redo();        
+    }
+    public void clearMacro()
+    {
+        m_macro.clear();
+    }
+
+    public void addMacro(String action)
+    {
+        ICommand com;
+        if (!m_command_list.contains(action))
+        {return;}
+        switch (action) {
+            case "PASTE":
+                com = new Paste(this);
+                break;
+            case "COPY":
+                com = new Copy(this);
+                break;
+            case "CUT":
+                com = new Cut(this);
+                break;
+            case "WRITE":
+                com = new Write(this);
+                System.out.println("Entrer le nouveau texte :");
+                String text = scanner.nextLine();
+                ((Write) com).setNewText(text);
+                break;
+            case "SELECT":
+                com = new Select(this);
+                int begin_id;
+                int end_id;
+                while (true) { 
+                    System.out.println("Enter a valid begin index :");
+                    begin_id = scanner.nextInt();
+                    if (begin_id >= 0)
+                    {
+                        break;
+                    }
+                }
+
+                while (true) { 
+                    System.out.println("Enter a valid end index :");
+                    end_id = scanner.nextInt();
+                    if (end_id >= 0)
+                    {
+                        break;
+                    }
+                }
+
+                ((Select) com).setBeginIndex(begin_id);
+                ((Select) com).setEndIndex(end_id);
+                break;
+
+            case "DELETE":
+                com = new Delete(this);
+                break;
+            
+            default:
+                throw new IllegalArgumentException(action+" n'est pas une action valide.");
+
+        }
+        
+        if (com != null){
+            m_macro.add(com);
+        }
+    }
+
+    public void playCommand(String command)
+    {
+        switch(command)
+        {
+            case "WRITE":
+                addCommand("Write");
+                break;
+            case "SELECT":
+                addCommand("Select");
+                break;
+            case "DELETE":
+                addCommand("Delete");
+                break;
+            case "COPY":
+                addCommand("Copy");
+                break;
+            case "CUT":
+                addCommand("Cut");
+                break;
+            case "PASTE":
+                addCommand("Paste");
+                break;
+            case "PLAY MACRO":
+                addCommand("Macro");
+                break;
+            case "UNDO":
+                undoCommand();
+                break;
+            case "REDO":
+                redoCommand();
+                break;
+        }
     }
     
 }

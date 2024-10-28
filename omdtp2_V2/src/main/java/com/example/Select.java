@@ -15,6 +15,27 @@ public class Select extends ACommand {
         begin_id = -1;
         end_id = -1;
     }
+
+    public Select (Select select)
+    {
+        super(select.getEditeur());
+        begin_id = select.getBegin_id();
+        end_id = select.getEnd_id();
+    }
+
+    public Editeur getEditeur()
+    {
+        return m_editeur;
+    }
+
+    public int getBegin_id() {
+        return begin_id;
+    }
+
+    public int getEnd_id() {
+        return end_id;
+    }
+    
     
     @Override
     public void execute() {

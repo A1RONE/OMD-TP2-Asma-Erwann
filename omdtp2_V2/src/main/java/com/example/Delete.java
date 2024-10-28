@@ -12,6 +12,18 @@ public class Delete extends ACommand {
         deleted_text = "";
     }
 
+    public Delete(Delete copy){
+        super(copy.getEditeur());
+        deleted_text = copy.getOldData();
+    }
+
+    public Editeur getEditeur()
+    {
+        return m_editeur;
+    }
+
+
+
     @Override
     public void execute()
     {
@@ -49,5 +61,6 @@ public class Delete extends ACommand {
     {
         return deleted_text;
     }
+    
 
 }
