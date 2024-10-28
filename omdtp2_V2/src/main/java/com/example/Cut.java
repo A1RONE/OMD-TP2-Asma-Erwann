@@ -11,6 +11,16 @@ public class Cut extends ACommand {
         super(editeur);
         new_text = "";
     }
+
+    public Cut(Cut cut){
+        super(cut.getEditeur());
+        new_text = cut.getOldData();
+    }
+
+    public Editeur getEditeur()
+    {
+        return m_editeur;
+    }
     
     @Override
     public void execute() {

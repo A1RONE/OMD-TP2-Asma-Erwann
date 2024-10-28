@@ -16,6 +16,18 @@ public class Write extends ACommand {
         new_text = "";
         old_text = "";
     }
+
+    public Write (Write write)
+    {
+        super(write.getEditeur());
+        new_text = write.getNewData();
+        old_text = write.getOldData();
+    }
+
+    public Editeur getEditeur()
+    {
+        return m_editeur;
+    }
     
     @Override
     public void execute() {
@@ -53,6 +65,11 @@ public class Write extends ACommand {
     public String getOldData()
     {
         return old_text;
+    }
+
+    public String getNewData()
+    {
+        return new_text;
     }
 
     public void setNewText(String text)

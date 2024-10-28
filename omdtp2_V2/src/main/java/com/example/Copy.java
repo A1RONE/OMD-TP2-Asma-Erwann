@@ -10,6 +10,15 @@ public class Copy extends ACommand {
         super(editeur);
     }
 
+    public Copy(Copy copy){
+        super(copy.getEditeur());
+    }
+
+    public Editeur getEditeur()
+    {
+        return m_editeur;
+    }
+
     @Override
     public void execute() {
         // Editeur editeur = new Editeur();

@@ -12,6 +12,17 @@ public class Paste extends ACommand {
         super(editeur);
         old_text = "";
     }
+
+    public Paste (Paste paste)
+    {
+        super(paste.getEditeur());
+        old_text = paste.getOldData();
+    }
+
+    public Editeur getEditeur()
+    {
+        return m_editeur;
+    }
     
     @Override
     public void execute() {
